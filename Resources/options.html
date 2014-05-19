@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="André Filipe">
+
+    <title>Delicious Desktop - Options</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/blog.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="index.html">Links</a>
+          <a class="blog-nav-item active" href="options.html">Options</a>
+          <a class="blog-nav-item exit" style="float: right;" href="#">Exit</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-sm-12">
+          <form class="form-horizontal" role="form">
+
+            <div class="form-group">
+              <label for="username" class="col-sm-2 control-label">Username</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="username" name="username" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="private_key" class="col-sm-2 control-label">Private Key</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="private_key" name="private_key" placeholder="">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" onclick="App.Options.save();">Save</button>
+              </div>
+            </div>
+
+          </form>
+
+        </div><!-- /.blog-main -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <div id="footer" class="blog-footer">
+      <p>Powered by <a target="_blank" href="https://twitter.com/masnathan">@masnathan</a>.</p>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	  <script src="assets/js/app.js"></script>
+    <script type="text/javascript">
+      App.Options.load();
+    </script>
+  </body>
+</html>
