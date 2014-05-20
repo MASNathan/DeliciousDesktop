@@ -2,6 +2,10 @@ $(document).ready(function() {
   $('.exit').click(function() {
     Ti.App.exit();
   });
+
+  $('#search').keyup(function() {
+    App.Table.search($(this).val());
+  });
 });
 
 var App = {};
@@ -24,7 +28,6 @@ App.Config.load = function() {
 
     var jsonData = window.atob(encodedData);
     var configs = Ti.JSON.parse(jsonData);
-    Ti.App.stdout(configs);
     
     App.Config.Options = configs;
   }
@@ -58,6 +61,36 @@ App.Options.save =  function() {
   App.Config.save(configs);
 };
 
-//App.Config.save({username: 'masnathan', private_key: 'J0loQjQ9pfZC39SyptuElV-AU4rJoQyweNGsSe2zIwc='});
+App.Request = {};
+App.Request.data = [];
+App.Request.linq = null;
+App.Request.feed = function(username, private_key, callbackFunction) {
+    var data = $.get('//feed.php', {u: username, k: private_key}, callbackFunction, 'json');
+};
+
+App.Table = {};
+App.Table.obj = $('table.table');
+App.Table.load = function(data) {
+  App.Table.obj.html('');
+  for (var i = data.length - 1; i >= 0; i--) {
+    App.Table.obj.append('<tr><td><div class="link"><a href="' + data[i].u + '" target="_blank" >' + data[i].d + '</a></div></td></tr>');
+  }
+};
+App.Table.search = function(string) {
+  var searchResult = App.Request.linq.Where(function(item) {
+    var tagTrain = item.t.join('-');
+    Ti.App.stdout(tagTrain);
+    return tagTrain.indexOf(string) !== -1;
+  });
+
+  App.Table.load(searchResult.items);
+};
 
 App.Config.load();
+
+App.Request.feed(App.Config.Options.username, App.Config.Options.private_key, function(data) {
+  App.Request.data = data;
+  App.Request.linq = JSLINQ(data);
+  
+  App.Table.load(App.Request.data);
+});
